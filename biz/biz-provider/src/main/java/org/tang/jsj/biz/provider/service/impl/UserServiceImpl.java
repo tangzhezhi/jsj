@@ -10,7 +10,7 @@ import org.tang.jsj.biz.provider.model.User;
 import org.tang.jsj.biz.provider.service.UserService;
 import javax.annotation.Resource;
 
-@Service(version = "1.0.0",timeout = 60000)
+@Service(version = "1.0.0",timeout = 60000,interfaceClass = UserService.class )
 @Component
 public class UserServiceImpl  implements UserService {
 
@@ -25,13 +25,15 @@ public class UserServiceImpl  implements UserService {
 //        BeanUtil.copyProperties(user,target);
 //        userMapper.insert(target.getId(),target.getName(), target.getAge());
 //    }
-
     @DS("master")
     @Override
     public UserDTO selectUserOne(String id) {
         UserDTO target = new UserDTO();
-//        User user =  userMapper.selectOne(id);
-//        BeanUtil.copyProperties(user,target);
+        target.setAge(1);
+        target.setId("123");
+        target.setName("tang");
+        User user =  userMapper.selectOne(id);
+        BeanUtil.copyProperties(user,target);
         return target;
     }
 

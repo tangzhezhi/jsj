@@ -13,7 +13,7 @@ spring:
         slave:
           username: root
           password: tang
-          url: jdbc:mysql://192.168.2.159:3306/tang?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=GMT%2B8
+          url: jdbc:mysql://127.0.0.1:3306/tang?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=GMT%2B8
           driver-class-name: com.mysql.cj.jdbc.Driver
       mp-enabled: true
   #dubbo
@@ -25,6 +25,11 @@ spring:
       protocol:     #协议配置，用于配置提供服务的协议信息，协议由提供方指定，消费方被动接受。
         name: dubbo
         port: 20880
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  config-location: classpath:mybatis-config.xml
+  type-aliases-package: org.tang.jsj.biz.provider.model
 
 logging:
   level:
