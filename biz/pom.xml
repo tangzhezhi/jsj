@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>jsj</artifactId>
+        <groupId>org.tang</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.tang.jsj</groupId>
+    <artifactId>biz</artifactId>
+
+    <packaging>pom</packaging>
+
+    <name>biz</name>
+    <description>业务处理</description>
+    <modules>
+        <module>biz-provider</module>
+        <module>biz-api</module>
+        <module>biz-consumer</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <dubbo.starter.version>2.0.0</dubbo.starter.version>
+        <zkclient.version>0.10</zkclient.version>
+    </properties>
+
+
+</project>

@@ -1,0 +1,10 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /demo
+
+spring:
+  dubbo:
+    application:
+      name: biz-consumer
+      registry: zookeeper://127.0.0.1:2181
