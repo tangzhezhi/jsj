@@ -33,7 +33,13 @@ public class HelloController {
     @GetMapping("/queryUser")
     public UserDTO queryUser(@RequestParam(defaultValue = "1") String id) {
         log.info("query......");
-        return userService.selectUserOne("1");
+        return userService.selectUserOne(id);
+    }
+
+    @GetMapping("/queryUserFromSlave")
+    public UserDTO queryUserFromSlave(@RequestParam(defaultValue = "1") String id) {
+        log.info("query......");
+        return userService.selectUserOneFromSlave(id);
     }
 
 //    @GetMapping("/addUser")
