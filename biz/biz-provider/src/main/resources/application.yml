@@ -4,6 +4,7 @@ server:
 spring:
   datasource:
     dynamic:
+      p6spy: true
       datasource:
         master:
           username: root
