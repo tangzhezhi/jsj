@@ -21,10 +21,13 @@ import java.lang.annotation.*;
 
 /**
  * 注解在类上或方法上来切换数据源
+ *
+ * @author TaoYu Kanyuxia
+ * @since 1.0.0
  */
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface JSJ_DS {
+public @interface DS_BASE {
 
 }

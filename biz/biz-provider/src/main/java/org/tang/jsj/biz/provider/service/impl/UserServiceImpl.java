@@ -7,7 +7,7 @@ import org.tang.jsj.biz.dto.UserDTO;
 import org.tang.jsj.biz.provider.mapper.UserMapper;
 import org.tang.jsj.biz.provider.model.User;
 import org.tang.jsj.biz.provider.service.UserService;
-import org.tang.jsj.ds.annotation.DS;
+import org.tang.jsj.ds.annotation.DS_BUSINESS;
 
 import javax.annotation.Resource;
 
@@ -26,26 +26,9 @@ public class UserServiceImpl  implements UserService {
 //        BeanUtil.copyProperties(user,target);
 //        userMapper.insert(target.getId(),target.getName(), target.getAge());
 //    }
-    @DS("master")
+    @DS_BUSINESS
     @Override
-    public UserDTO selectUserOne(String id) {
-        UserDTO target = new UserDTO();
-        target.setAge(1);
-        target.setId("123");
-        target.setName("tang");
-        User user = null;
-        try {
-            user = userMapper.selectOne(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        BeanUtil.copyProperties(user,target);
-        return target;
-    }
-
-    @DS("slave")
-    @Override
-    public UserDTO selectUserOneFromSlave(String id) {
+    public UserDTO selectUserOne(String id,String orgId) {
         UserDTO target = new UserDTO();
         target.setAge(1);
         target.setId("123");

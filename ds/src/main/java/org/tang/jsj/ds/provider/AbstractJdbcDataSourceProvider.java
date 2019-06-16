@@ -70,6 +70,9 @@ public abstract class AbstractJdbcDataSourceProvider implements DynamicDataSourc
         this.password = password;
     }
 
+    protected AbstractJdbcDataSourceProvider() {
+    }
+
     @Override
     public Map<String, DataSource> loadDataSources() {
         Connection conn = null;

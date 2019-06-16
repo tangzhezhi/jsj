@@ -31,16 +31,12 @@ public class HelloController {
 
 
     @GetMapping("/queryUser")
-    public UserDTO queryUser(@RequestParam(defaultValue = "1") String id) {
+    public UserDTO queryUser(@RequestParam(defaultValue = "1") String id, String orgId) {
         log.info("query......");
-        return userService.selectUserOne(id);
+        return userService.selectUserOne(id,orgId);
     }
 
-    @GetMapping("/queryUserFromSlave")
-    public UserDTO queryUserFromSlave(@RequestParam(defaultValue = "1") String id) {
-        log.info("query......");
-        return userService.selectUserOneFromSlave(id);
-    }
+
 
 //    @GetMapping("/addUser")
 //    public void addUser(@RequestParam UserDTO user) {

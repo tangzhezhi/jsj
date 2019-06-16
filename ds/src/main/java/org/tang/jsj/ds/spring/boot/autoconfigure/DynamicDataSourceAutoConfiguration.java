@@ -19,14 +19,13 @@ package org.tang.jsj.ds.spring.boot.autoconfigure;
 import org.tang.jsj.ds.DynamicDataSourceConfigure;
 import org.tang.jsj.ds.DynamicDataSourceCreator;
 import org.tang.jsj.ds.DynamicRoutingDataSource;
-import org.tang.jsj.ds.aop.DynamicDataSourceAdvisor;
-import org.tang.jsj.ds.aop.DynamicDataSourceAnnotationAdvisor;
-import org.tang.jsj.ds.aop.DynamicDataSourceAnnotationInterceptor;
+import org.tang.jsj.ds.aop.*;
 import org.tang.jsj.ds.processor.DsHeaderProcessor;
 import org.tang.jsj.ds.processor.DsProcessor;
 import org.tang.jsj.ds.processor.DsSessionProcessor;
 import org.tang.jsj.ds.processor.DsSpelExpressionProcessor;
 import org.tang.jsj.ds.provider.DynamicDataSourceProvider;
+import org.tang.jsj.ds.provider.YmlDbDynamicDataSourceProvider;
 import org.tang.jsj.ds.provider.YmlDynamicDataSourceProvider;
 import org.tang.jsj.ds.spring.boot.autoconfigure.druid.DruidDynamicDataSourceConfiguration;
 import org.tang.jsj.ds.strategy.DynamicDataSourceStrategy;
@@ -66,7 +65,8 @@ public class DynamicDataSourceAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public DynamicDataSourceProvider dynamicDataSourceProvider(DynamicDataSourceCreator dynamicDataSourceCreator) {
-        return new YmlDynamicDataSourceProvider(properties, dynamicDataSourceCreator);
+//        return new YmlDynamicDataSourceProvider(properties, dynamicDataSourceCreator);
+        return new YmlDbDynamicDataSourceProvider(properties,dynamicDataSourceCreator);
     }
 
     @Bean
@@ -91,15 +91,31 @@ public class DynamicDataSourceAutoConfiguration {
         return dataSource;
     }
 
+
     @Bean
     @ConditionalOnMissingBean
-    public DynamicDataSourceAnnotationAdvisor dynamicDatasourceAnnotationAdvisor(DsProcessor dsProcessor) {
-        DynamicDataSourceAnnotationInterceptor interceptor = new DynamicDataSourceAnnotationInterceptor();
+    public MyDynamicDataSourceAnnotationAdvisor dynamicDatasourceAnnotationAdvisor(DsProcessor dsProcessor) {
+        MyDynamicDataSourceAnnotationInterceptor interceptor = new MyDynamicDataSourceAnnotationInterceptor();
         interceptor.setDsProcessor(dsProcessor);
-        DynamicDataSourceAnnotationAdvisor advisor = new DynamicDataSourceAnnotationAdvisor(interceptor);
+        MyDynamicDataSourceAnnotationAdvisor advisor = new MyDynamicDataSourceAnnotationAdvisor(interceptor);
         advisor.setOrder(properties.getOrder());
         return advisor;
     }
+
+
+//    @Bean
+//    @ConditionalOnMissingBean
+//    public DynamicDataSourceAnnotationAdvisor dynamicDatasourceAnnotationAdvisor(DsProcessor dsProcessor) {
+//        DynamicDataSourceAnnotationInterceptor interceptor = new DynamicDataSourceAnnotationInterceptor();
+//        interceptor.setDsProcessor(dsProcessor);
+//        DynamicDataSourceAnnotationAdvisor advisor = new DynamicDataSourceAnnotationAdvisor(interceptor);
+//        advisor.setOrder(properties.getOrder());
+//        return advisor;
+//    }
+
+
+
+
 
     @Bean
     @ConditionalOnMissingBean
