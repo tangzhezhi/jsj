@@ -20,8 +20,13 @@ Vue.use(VueResource)
 Vue.http.options.root = 'http://localhost:8888/demo/';
 
 import 'mint-ui/lib/style.css'
-import 'jquery/dist/jquery.min'
-import 'bootstrap/dist/css/bootstrap.css'
+// import 'jquery/dist/jquery.min'
+// import 'bootstrap/dist/css/bootstrap.css'
+
+// 导入 MUI 的样式
+import './lib/mui/css/mui.min.css'
+// 导入扩展图标样式
+import './lib/mui/css/icons-extra.css'
 
 // 按需导入 Mint-UI 中的组件   
 import { Header, Swipe, SwipeItem, Button ,Navbar, TabItem, Tabbar } from 'mint-ui'

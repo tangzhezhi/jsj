@@ -40,10 +40,10 @@ export default {
       this.$http
         .get("api/getcomments/" + this.id + "?pageindex=" + this.pageIndex)
         .then(result => {
-          if (result.body.status === 0) {
+          if (result.status === 200) {
             // this.comments = result.body.message;
             // 每当获取新评论数据的时候，不要把老数据清空覆盖，而是应该以老数据，拼接上新数据
-            this.comments = this.comments.concat(result.body.message);
+            this.comments = this.comments.concat(result.body);
           } else {
             Toast("获取评论失败！");
           }
