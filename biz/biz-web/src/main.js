@@ -17,7 +17,7 @@ import VueResource from 'vue-resource'
 // 2.2 安装 vue-resource
 Vue.use(VueResource)
 // 设置请求的根路径
-Vue.http.options.root = 'http://localhost:8888/demo/';
+Vue.http.options.root = 'http://192.168.2.159:18888/demo/';
 
 import 'mint-ui/lib/style.css'
 // import 'jquery/dist/jquery.min'
