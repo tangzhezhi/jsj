@@ -3,6 +3,8 @@ package org.tang.jsj.biz.conumer.controller;
 import com.alibaba.dubbo.config.annotation.Reference;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import org.tang.jsj.biz.conumer.utils.ApiBaseAction;
+import org.tang.jsj.biz.conumer.vo.UserVo;
 import org.tang.jsj.biz.dto.UserDTO;
 import org.tang.jsj.biz.provider.service.HelloService;
 import org.tang.jsj.biz.provider.service.UserService;
@@ -18,14 +20,13 @@ import java.util.*;
  */
 @RestController
 @Slf4j
-public class HelloController {
+public class HelloController extends ApiBaseAction {
     @Reference(version = "1.0.0")
     private HelloService helloService;
 
     @Reference(version = "1.0.0")
     private UserService userService;
 
-    @CrossOrigin(origins = {"http://localhost:3000", "null"})
     @GetMapping("/api/getlunbo")
     public Object getlunbo() {
        List result = new ArrayList();
@@ -46,7 +47,6 @@ public class HelloController {
     }
 
 
-    @CrossOrigin(origins = {"http://localhost:3000", "null"})
     @GetMapping("/api/getnewslist")
     public Object getNewLists() {
         List result = new ArrayList();
@@ -70,7 +70,6 @@ public class HelloController {
     }
 
 
-    @CrossOrigin(origins = {"http://localhost:3000", "null"})
     @GetMapping("/api/getcomments/{id}")
     public Object getcomments(@PathVariable String id ,int pageindex) {
         List result = new ArrayList();
@@ -119,13 +118,20 @@ public class HelloController {
     }
 
 
+
+
     @GetMapping("/queryUser")
     public UserDTO queryUser(@RequestParam(defaultValue = "1") String id, String orgId) {
         log.info("queryUser");
         return userService.selectUserOne(id,orgId);
     }
 
-
+    @RequestMapping("/login")
+    public Map login(String phone, String pwd) {
+        log.info("login:phone={},pwd={}",phone,pwd);
+        UserVo result = UserVo.builder().name("张三").phone(phone).sex("男").build();
+        return toResponsSuccess(result);
+    }
 
 //    @GetMapping("/addUser")
 //    public void addUser(@RequestParam UserDTO user) {

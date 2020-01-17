@@ -19,13 +19,15 @@ spring:
       mp-enabled: true
   #dubbo
   dubbo:
+    server: true
     application:
       id: biz-provider
       name: biz-provider
-      registry: zookeeper://127.0.0.1:2181
-      protocol:     #协议配置，用于配置提供服务的协议信息，协议由提供方指定，消费方被动接受。
-        name: dubbo
-        port: 20880
+    registry:
+      address: zookeeper://127.0.0.1:2181
+    protocol:     #协议配置，用于配置提供服务的协议信息，协议由提供方指定，消费方被动接受。
+      name: dubbo
+      port: 30880
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
