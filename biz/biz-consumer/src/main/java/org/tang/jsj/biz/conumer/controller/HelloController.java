@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import org.tang.jsj.biz.conumer.utils.ApiBaseAction;
+import org.tang.jsj.biz.conumer.vo.MenuVo;
 import org.tang.jsj.biz.conumer.vo.UserVo;
 import org.tang.jsj.biz.dto.UserDTO;
 import org.tang.jsj.biz.provider.service.HelloService;
@@ -12,6 +13,8 @@ import org.tang.jsj.biz.provider.service.UserService;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
+
+import static java.util.Arrays.asList;
 
 /**
  * <p>
@@ -129,9 +132,22 @@ public class HelloController extends ApiBaseAction {
     @RequestMapping("/login")
     public Map login(String phone, String pwd) {
         log.info("login:phone={},pwd={}",phone,pwd);
-        UserVo result = UserVo.builder().name("张三").phone(phone).sex("男").build();
+        UserVo result = UserVo.builder().name("张三").phone(phone).sex("男").token(UUID.randomUUID().toString()).build();
         return toResponsSuccess(result);
     }
+
+
+    @RequestMapping("/getMenu")
+    public Map getMenu(String token) {
+        log.info("getMenu token::",token);
+
+        MenuVo menuVo1 = MenuVo.builder().code("notice").name("通知").iconUrl("notice").url("/notice").hasNewMsg(false).isShow(1).build();
+        MenuVo menuVo2 = MenuVo.builder().code("wallet").name("钱包").iconUrl("wallet").url("/wallet").hasNewMsg(false).isShow(1).build();
+
+        List<MenuVo> data =  new ArrayList<>(asList(menuVo1,menuVo2));
+        return toResponsSuccess(data);
+    }
+
 
 //    @GetMapping("/addUser")
 //    public void addUser(@RequestParam UserDTO user) {

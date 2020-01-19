@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class UserVo {
 
+    private String token;
     private String name;
     private String phone;
     private String sex;
